@@ -61,12 +61,19 @@ class sistemaV:
     def verNumeroMascotas(self):
         return len(self.__lista_felinos) + len(self.__lista_caninos)
 
-    def ingresarMascota(self, mascota):
-        self.__lista_mascotas.append(mascota)
-        self.__lista_mascotas[mascota.verHistoria()] = mascota
+    def ingresarFelino(self, mascota):
+        self.__lista_felinos[mascota.verHistoria()] = mascota
+
+    def ingresarCanino(self, mascota):
+        self.__lista_caninos[mascota.verHistoria()] = mascota
 
     def verFechaIngreso(self, historia):
         # busco la mascota y devuelvo el atributo solicitado
+        if historia in self.__lista_caninos:
+            return self.__lista_caninos[mascota.verHistoria()]
+        if historia in self.__lista_felinos:
+            return self.__lista_felinos[mascota.verHistoria()]
+        return None
         for masc in self.__lista_mascotas:
             if historia == masc.verHistoria():
                 return masc.verFecha()
