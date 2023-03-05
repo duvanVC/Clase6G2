@@ -16,7 +16,6 @@ def main():
         if menu == 1:
             if servicio_hospitalario.verNumeroMascotas() >= 10:
                 print("No hay espacio dispnible...")
-                continue
             historia = int(
                 input(" ingrese la historia clinica de la mascota: "))
             if servicio_hospitalario.verificarExiste(historia) == False:
@@ -32,18 +31,35 @@ def main():
                 peso = int(input("Ingrese el peso de la mascota: "))
                 fecha = input("Ingrese la fecha de ingreso (dia/mes/año): ")
                 medicamento = Medicamento()
-                medicamento.asignarNombre(
-                    input("Ingrese nombre del medicamento: "))
-                medicamento.asignarDosis(
-                    int(input("Ingrese dosis del medicamento: ")))
+                verificar = True
+                while verificar == True:
+                    medicamento.asignarNombre(
+                        input("Ingrese nombre del medicamento: "))
+                    medicamento.asignarDosis(
+                        int(input("Ingrese dosis del medicamento: ")))
+                    mas.asignarMedicamento(medicamento)
+                    while True:
+                        verifi = input(
+                            "¿Desea agregar otro medicamento?: \n1| No. \n2| Si. \n>")
+                        if verifi == '1':
+                            verificar = False
+                            break
+                        if verifi == '2':
+                            verificar = True
+                            break
+                        else:
+                            print('¡ERROR! OPCIÓN NO VALIDA.')
                 mas = Mascota()
                 mas.asignarNombre(nombre)
                 mas.asignarHistoria(historia)
                 mas.asignarPeso(peso)
                 mas.asignarTipo(tipo)
                 mas.asignarFecha(fecha)
-                mas.asignarMedicamento(medicamento)
-                servicio_hospitalario.ingresarMascota(mas)
+                # mas.asignarMedicamento(medicamento)
+                if tipo == "Felino":
+                    servicio_hospitalario.ingresarFelino(mas)
+                else:
+                    servicio_hospitalario.ingresarCanino(mas)
 
             else:
                 print(

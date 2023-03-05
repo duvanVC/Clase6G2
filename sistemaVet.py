@@ -2,11 +2,11 @@ class Mascota:
 
     def __init__(self):
         self.__nombre = " "
-        self.__historia = 0
+        self.__historia = ""
         self.__tipo = " "
         self.__peso = " "
         self.__fecha_ingreso = " "
-        self.__medicamento = ""
+        self.__medicamento = {}
 
     def verNombre(self):
         return self.__nombre
@@ -42,7 +42,7 @@ class Mascota:
         self.__fecha_ingreso = f
 
     def asignarMedicamento(self, n):
-        self.__medicamento = n
+        self.__medicamento[n.verNombre()] = n.verDosis()
 
 
 class sistemaV:
@@ -69,30 +69,47 @@ class sistemaV:
 
     def verFechaIngreso(self, historia):
         # busco la mascota y devuelvo el atributo solicitado
+        # return self.__lista_caninos.get(historia)
         if historia in self.__lista_caninos:
-            return self.__lista_caninos[mascota.verHistoria()]
+            return self.__lista_caninos[historia].verFecha()
         if historia in self.__lista_felinos:
-            return self.__lista_felinos[mascota.verHistoria()]
+            return self.__lista_felinos[historia].verFecha()
         return None
-        for masc in self.__lista_mascotas:
-            if historia == masc.verHistoria():
-                return masc.verFecha()
-        return None
+        # for masc in self.__lista_caninos:
+        #     if historia == masc:
+        #         return masc.verFecha()
+        # for masc in self.__lista_felinos:
+        #     if historia == masc:
+        #         return masc.verFecha()
+        # return None
 
     def verMedicamento(self, historia):
         # busco la mascota y devuelvo el atributo solicitado
-        for masc in self.__lista_mascotas:
-            if historia == masc.verHistoria():
-                return masc.ver_Medicamento()
+        if historia in self.__lista_caninos:
+            return self.__lista_caninos[historia].verMedicamento()
+        if historia in self.__lista_caninos:
+            return self.__lista_felinos[historia].verMedicamento()
         return None
 
     def eliminarMascota(self, historia):
-        for masc in self.__lista_mascotas:
-            if historia == masc.verHistoria():
-                # del self.__lista_mascotas[masc]
-                self.__lista_mascotas.remove(masc)  # opcion con el pop
-                return True  # eliminado con exito
+        if historia in self.__lista_caninos:
+            del self.__lista_caninos[historia]
+            return True
+        if historia in self.__lista_caninos:
+            del self.__lista_felinos[historia]
+            return True
         return False
+        # for masc in self.__lista_caninos:
+        #     if historia == masc.verHistoria():
+        #         # del self.__lista_mascotas[masc]
+        #         self.__lista_caninos.remove(masc)  # opcion con el pop
+        #         return True  # eliminado con exito
+        # for masc in self.__lista_felinos:
+        #     if historia == masc.verHistoria():
+        #         # del self.__lista_mascotas[masc]
+        #         self.__lista_felinos.remove(masc)  # opcion con el pop
+        #         return True
+        # return False
 
 
 class Medicamento:
